@@ -8,13 +8,14 @@ Cell pertama berfungsi untuk menghubungkan Google Colab dengan penyimpanan Googl
 Yang dilakukan: Menghubungkan akun Google Drive, berpindah ke folder /citra digital, dan menampilkan daftar file yang ada.
 
 Cara Pakai: Klik tombol Play, lalu ikuti instruksi pop-up untuk memberikan izin akses Google Drive.
+<img width="1558" height="316" alt="Screenshot 2026-01-05 at 20 47 13" src="https://github.com/user-attachments/assets/e7584970-c983-4eb9-8bdb-ceb8847891e7" />
 
 2. Pembersihan Cache Dataset (Opsional)
 Cell ini sangat berguna jika proses training gagal karena data yang terunduh rusak atau tidak lengkap.
 
-Yang dilakukan: Menghapus folder cache EMNIST di /root/.cache/emnist dan membuatnya kembali dalam keadaan bersih.
+Menghapus folder cache EMNIST di /root/.cache/emnist dan membuatnya kembali dalam keadaan bersih.
 
-Kapan digunakan: Jalankan ini jika Anda mendapatkan error terkait file dataset saat mencoba melakukan training.
+Kapan digunakan? Jalankan ini jika Anda mendapatkan error terkait file dataset saat mencoba melakukan training.
 
 3. Instalasi Library EMNIST
 Library ini diperlukan untuk memuat dataset karakter tulisan tangan secara otomatis.
@@ -48,4 +49,4 @@ Yang dilakukan: Memanggil gradio_app.py yang akan memuat model model_emnist.h5.
 
 Cara Pakai: Setelah dijalankan, cari tulisan "Running on public URL: https://...gradio.live". Klik link tersebut.
 
-Interaksi: Anda bisa langsung menggambar huruf/angka pada kanvas di browser, dan sistem akan memberikan prediksi karakter tersebut.
+Interaksi: Anda bisa langsung upload huruf/angka di browser, dan sistem akan memberikan prediksi karakter tersebut.
