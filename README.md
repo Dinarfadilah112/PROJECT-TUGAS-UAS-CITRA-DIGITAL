@@ -1,52 +1,51 @@
 # PROJECT-TUGAS-UAS-CITRA-DIGITAL
-Sistem Pengenalan Tulisan Tangan (CNN - EMNIST)
-Proyek ini adalah sistem klasifikasi tulisan tangan (huruf dan angka) menggunakan algoritma Convolutional Neural Network (CNN) yang dilatih dengan dataset EMNIST. Proyek ini dioptimalkan untuk dijalankan di Google Colab dan dilengkapi dengan antarmuka pengguna berbasis Gradio.
-Panduan Menjalankan Notebook Per-Cell
-1. Persiapan Direktori (Mount Drive)
-Cell pertama berfungsi untuk menghubungkan Google Colab dengan penyimpanan Google Drive Anda.
+🛠️ Persiapan Awal (Prasyarat)
+Sebelum menjalankan kode, pastikan pengguna telah menyiapkan hal berikut:
 
-Yang dilakukan: Menghubungkan akun Google Drive, berpindah ke folder /citra digital, dan menampilkan daftar file yang ada.
+File Proyek: Pastikan folder di Google Drive berisi file-file berikut:
 
-Cara Pakai: Klik tombol Play, lalu ikuti instruksi pop-up untuk memberikan izin akses Google Drive.
+SISTEM_TULISAN_TANGAN_CNN.ipynb (Notebook utama) (ini tidak usah di import ke folder google drive, langsung saja open di google colab)
+
+train.py (Skrip pelatihan model)
+
+gradio_app.py (Skrip antarmuka web)
+
+model_utils.py (Fungsi pembantu pengolahan citra)
+
+Struktur Folder: Simpan semua file di dalam folder Google Drive dengan path: /MyDrive/citra digital/.
+
+
+<img width="1349" height="753" alt="Screenshot 2026-01-06 at 15 50 22" src="https://github.com/user-attachments/assets/c47fbd82-4470-4c2e-95fb-7cf787587702" />
+
+
+Hardware Accelerator: Di Google Colab, masuk ke menu Runtime > Change runtime type > pilih T4 GPU.
+
 <img width="1558" height="316" alt="Screenshot 2026-01-05 at 20 47 13" src="https://github.com/user-attachments/assets/e7584970-c983-4eb9-8bdb-ceb8847891e7" />
 
-2. Pembersihan Cache Dataset (Opsional)
-Cell ini sangat berguna jika proses training gagal karena data yang terunduh rusak atau tidak lengkap.
+🚀 Langkah-Langkah Menjalankan
+1. Menghubungkan Google Drive
+Jalankan cell pertama untuk memberikan akses ke Google Drive agar Colab bisa membaca skrip Python dan menyimpan model hasil pelatihan.
 
-Menghapus folder cache EMNIST di /root/.cache/emnist dan membuatnya kembali dalam keadaan bersih.
+2. Instalasi Library & Persiapan Data
+Instalasi: Jalankan cell !pip install emnist untuk memasang pustaka dataset.
+Pembersihan Cache: Jika sebelumnya pernah gagal mengunduh data, jalankan cell pembersihan cache agar folder dataset kembali bersih.
+Unduh Dataset: Jalankan cell !wget untuk mengunduh dataset EMNIST secara manual ke sistem Colab guna memastikan data tersedia.
 
-Kapan digunakan? Jalankan ini jika Anda mendapatkan error terkait file dataset saat mencoba melakukan training.
+3. Melatih Model (Training)
+Jalankan cell yang berisi perintah:
+!python train.py
 
-3. Instalasi Library EMNIST
-Library ini diperlukan untuk memuat dataset karakter tulisan tangan secara otomatis.
+Proses: Model akan dilatih selama 10 epoch.
+Target: Akurasi akhir diharapkan mencapai kisaran 90% pada data pelatihan.
+Output: Setelah selesai, file model_emnist.h5 akan muncul di folder Drive Anda.
 
-Yang dilakukan: Menjalankan perintah !pip install emnist untuk mengunduh library yang dibutuhkan ke dalam environment Colab.
+4. Menjalankan Aplikasi Web
+Jalankan cell terakhir untuk membuka antarmuka prediksi:
+!python gradio_app.py
 
-4. Mengunduh Dataset Manual
-Terkadang pengunduhan otomatis via library lambat atau terputus. Cell ini memberikan solusi cadangan.
+Akses: Setelah muncul pesan sukses, klik Public URL (contoh: https://xxxx.gradio.live).
+Uji Coba: Gambar karakter apa saja pada kanvas yang disediakan, lalu sistem akan menampilkan hasil prediksinya secara otomatis.
 
-Yang dilakukan: Menggunakan perintah wget untuk mengunduh file dataset gzip.zip langsung dari server NIST seberat kurang lebih 536MB.
-
-Hasil: File akan tersimpan langsung di folder cache yang sudah disiapkan sebelumnya.
-
-5. Pelatihan Model (Training)
-Ini adalah inti dari pembuatan sistem kecerdasan buatan Anda.
-
-Yang dilakukan: Menjalankan skrip train.py.
-
-Proses: * Model CNN akan dibangun dengan beberapa lapis (Convolutional, Pooling, dan Dense).
-
-Sistem akan melakukan 10 kali putaran pelatihan (Epoch).
-
-Akurasi akan terpantau meningkat di setiap epoch (terakhir mencapai sekitar 90,53%).
-
-Hasil Akhir: File model_emnist.h5 akan tersimpan di Drive Anda.
-
-Menjalankan Antarmuka Web (Gradio)
-Cell terakhir digunakan untuk menjalankan aplikasi agar bisa dicoba secara visual.
-
-Yang dilakukan: Memanggil gradio_app.py yang akan memuat model model_emnist.h5.
-
-Cara Pakai: Setelah dijalankan, cari tulisan "Running on public URL: https://...gradio.live". Klik link tersebut.
-
-Interaksi: Anda bisa langsung upload huruf/angka di browser, dan sistem akan memberikan prediksi karakter tersebut.
+⚠️ Catatan Penting
+Interupsi: Jika ingin menghentikan aplikasi Gradio, Anda bisa menekan tombol stop pada cell atau memberikan perintah interupsi keyboard di Colab.
+GPU: Tanpa mengaktifkan GPU, proses pelatihan (train.py) akan memakan waktu jauh lebih lama.
